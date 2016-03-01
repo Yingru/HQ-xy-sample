@@ -1,0 +1,8 @@
+IC_file = in.txt
+XY_file = out.txt
+IC_Nx_max = 100
+IC_Ny_max = 100
+IC_dx = 0.1
+IC_dy = 0.1
+IC_tau0 = 0.6
+N_sample = 1000000
