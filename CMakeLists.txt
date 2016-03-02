@@ -21,3 +21,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 set(LIBRARY_NAME "lib${PROJECT_NAME}")
 add_subdirectory(src)
+
+install(FILES HQ_sample.conf DESTINATION ${PROJECT_NAME})
+

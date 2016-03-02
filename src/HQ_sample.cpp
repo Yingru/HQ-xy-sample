@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 
 	HQ_XY HQ_gen(var_map);
 	HQ_gen.HQ_XY_sample();
-	
+ 	std::cout << " T_AA  = " << HQ_gen.get_TAA() << std::endl;	
 	return 0;
 }
 

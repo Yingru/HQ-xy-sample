@@ -38,6 +38,7 @@ class HQ_XY
 	HQ_XY(const VarMap& var_map);
 	~HQ_XY(){};
 	void HQ_XY_sample(void);
+	double get_TAA(void){return Int_T_AB_;};
 };
 
 #endif

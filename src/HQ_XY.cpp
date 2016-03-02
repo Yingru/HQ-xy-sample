@@ -119,7 +119,7 @@ void HQ_XY::HQ_XY_sample()
 {
 	int ix, iy;
 	std::uniform_real_distribution<double> unit_distribution(0.0, 1.0);
-	fs::ofstream fo("out.txt");
+	fs::ofstream fo(filename_out_);
 	for(int i=0;i<N_sample_;i++)
 	{
 		iPDF(unit_distribution(generator), ix, iy);
