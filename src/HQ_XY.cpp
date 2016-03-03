@@ -124,7 +124,9 @@ void HQ_XY::HQ_XY_sample()
         // modified by Yingru
         // let's now do this easier way (instead of add the weight in the final analysis process)
         // let's produce charm quarks based on the integrated TA*TB
-        N_sample_scaled = N_sample_ * Int_T_AB_;
+        N_sample_scaled = int(N_sample_ * Int_T_AB_);
+        if (N_sample_scaled == 0)  // in order to avoid the situation that the event is too collisional and there's no particle produced
+            N_sample_scaled = 1
 //        XY_list_(boost::extents[N_sample_scaled][2]);
 //        std::cout << N_sample_<< " " << N_sample_scaled <<  std::endl; 
 	for(int i=0;i<N_sample_scaled;i++)
