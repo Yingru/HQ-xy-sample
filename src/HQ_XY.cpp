@@ -41,7 +41,7 @@ void HQ_XY::IC_read(void)
         	do
   			{
         		sline >> entry;
-				T_AB_[ix][iy] = std::stof(entry);
+				T_AB_[ix][iy] = std::stof(entry) * std::stof(entry);
 				iy ++;
 	    	}while(sline and iy < Ny_max_);
 		}
