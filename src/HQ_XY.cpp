@@ -11,7 +11,7 @@ HQ_XY::HQ_XY(const VarMap& var_map)
 	x_min_(-var_map["IC_Nx_max"].as<int>()/2.0*var_map["IC_dx"].as<double>()),
 	y_min_(-var_map["IC_Ny_max"].as<int>()/2.0*var_map["IC_dy"].as<double>()),
 	T_AB_(boost::extents[var_map["IC_Nx_max"].as<int>()][var_map["IC_Ny_max"].as<int>()]),
-	XY_list_(boost::extents[var_map["N_sample"].as<int>()][2]),
+//	XY_list_(boost::extents[(var_map["N_sample"]).as<int>()][2]),
 	N_sample_(var_map["N_sample"].as<int>()),
 	norm(1.0)
 {
@@ -118,14 +118,24 @@ void HQ_XY::iPDF(double val, int & ix, int & iy)
 void HQ_XY::HQ_XY_sample()
 {
 	int ix, iy;
+	double XY_list_x, XY_list_y;
 	std::uniform_real_distribution<double> unit_distribution(0.0, 1.0);
 	fs::ofstream fo(filename_out_);
-	for(int i=0;i<N_sample_;i++)
+        // modified by Yingru
+        // let's now do this easier way (instead of add the weight in the final analysis process)
+        // let's produce charm quarks based on the integrated TA*TB
+        N_sample_scaled = N_sample_ * Int_T_AB_;
+//        XY_list_(boost::extents[N_sample_scaled][2]);
+//        std::cout << N_sample_<< " " << N_sample_scaled <<  std::endl; 
+	for(int i=0;i<N_sample_scaled;i++)
 	{
 		iPDF(unit_distribution(generator), ix, iy);
-		XY_list_[i][0] = x_min_ + ix*dx_ + dx_*(unit_distribution(generator));
-		XY_list_[i][1] = y_min_ + iy*dy_ + dy_*(unit_distribution(generator));
-		fo << XY_list_[i][0] << " "  << XY_list_[i][1] << std::endl;
+		XY_list_x = x_min_ + ix*dx_ + dx_*(unit_distribution(generator));
+		XY_list_y = y_min_ + iy*dy_ + dy_*(unit_distribution(generator));
+		fo << XY_list_x << " "  << XY_list_y << std::endl;
+//		XY_list_[i][0] = x_min_ + ix*dx_ + dx_*(unit_distribution(generator));
+//		XY_list_[i][1] = y_min_ + iy*dy_ + dy_*(unit_distribution(generator));
+//		fo << XY_list_[i][0] << " "  << XY_list_[i][1] << std::endl;
 	}
 	
 }

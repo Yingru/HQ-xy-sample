@@ -20,10 +20,11 @@ class HQ_XY
 
 	double const dx_, dy_, tau0_, x_min_, y_min_, norm;
 	int const Nx_max_, Ny_max_, N_sample_;
+        int N_sample_scaled;
 	const fs::path filename_in_, filename_out_;
 
 	boost::multi_array<double, 2> T_AB_;
-	boost::multi_array<double, 2> XY_list_;
+//	boost::multi_array<double, 2> XY_list_;
 	std::vector<ele> PDF;
 	double Int_T_AB_; //Integrated T_AB_ as weighted factor
 
