@@ -22,7 +22,9 @@ int main(int argc, char* argv[])
 	("IC_dx", po::value<double>(), "IC dx")
 	("IC_dy", po::value<double>(), "IC dy")
 	("IC_tau0", po::value<double>(), "IC tau0")
-	("N_sample", po::value<int>(), "Number of samples (by pair)");
+	("N_sample", po::value<int>(), "Number of samples (by pair)")
+	("N_scale", po::value<double>(), "scale Int_TAB(only useful if you choose scale_flag=1")
+	("scale_flag", po::value<int>(), "scale flag");
 	VarMap var_map{};
 	fs::ifstream conf_file{fpath};
     po::store(po::parse_config_file(conf_file, config_file_opts), var_map);

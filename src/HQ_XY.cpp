@@ -13,6 +13,8 @@ HQ_XY::HQ_XY(const VarMap& var_map)
 	T_AB_(boost::extents[var_map["IC_Nx_max"].as<int>()][var_map["IC_Ny_max"].as<int>()]),
 //	XY_list_(boost::extents[(var_map["N_sample"]).as<int>()][2]),
 	N_sample_(var_map["N_sample"].as<int>()),
+	N_scale_(var_map["N_scale"].as<double>()),
+	scale_flag_(var_map["scale_flag"].as<int>()),
 	norm(1.0)
 {
 	std::cout << "echo grid: x = [" << x_min_ << ", " << x_min_ + dx_*Nx_max_ << "], y = [" << y_min_ << ", " << y_min_ + dy_*Ny_max_ << "]" << std::endl;
@@ -124,17 +126,21 @@ void HQ_XY::HQ_XY_sample()
         // modified by Yingru
         // let's now do this easier way (instead of add the weight in the final analysis process)
         // let's produce charm quarks based on the integrated TA*TB
-        N_sample_scaled = int(N_sample_ * Int_T_AB_);
-        if (N_sample_scaled == 0)  // in order to avoid the situation that the event is too collisional and there's no particle produced
-            N_sample_scaled = 1
+        if (scale_flag_ == 0)
+            N_sample_scaled_ = N_sample_;
+        else
+            N_sample_scaled_ = int(0.01 * Int_T_AB_);
+            if (N_sample_scaled_ == 0)  // in order to avoid the situation that the event is too collisional and there's no particle produced
+                N_sample_scaled_ = 1;
 //        XY_list_(boost::extents[N_sample_scaled][2]);
-//        std::cout << N_sample_<< " " << N_sample_scaled <<  std::endl; 
-	for(int i=0;i<N_sample_scaled;i++)
+        std::cout << N_sample_<< " " << N_sample_scaled_ <<  std::endl; 
+	for(int i=0;i<N_sample_scaled_;i++)
 	{
 		iPDF(unit_distribution(generator), ix, iy);
 		XY_list_x = x_min_ + ix*dx_ + dx_*(unit_distribution(generator));
 		XY_list_y = y_min_ + iy*dy_ + dy_*(unit_distribution(generator));
 		fo << XY_list_x << " "  << XY_list_y << std::endl;
+		//std::cout << XY_list_x <<" " << XY_list_y << std::endl;
 //		XY_list_[i][0] = x_min_ + ix*dx_ + dx_*(unit_distribution(generator));
 //		XY_list_[i][1] = y_min_ + iy*dy_ + dy_*(unit_distribution(generator));
 //		fo << XY_list_[i][0] << " "  << XY_list_[i][1] << std::endl;
