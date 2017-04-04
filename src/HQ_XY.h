@@ -18,9 +18,10 @@ class HQ_XY
 {
 	private:
 
-	double const dx_, dy_, tau0_, x_min_, y_min_, norm;
+    double const dx_, dy_, tau0_, x_min_, y_min_, norm;
 	int const Nx_max_, Ny_max_, N_sample_;
-        int N_sample_scaled;
+    double const N_scale_;
+    int N_sample_scaled_, scale_flag_;
 	const fs::path filename_in_, filename_out_;
 
 	boost::multi_array<double, 2> T_AB_;

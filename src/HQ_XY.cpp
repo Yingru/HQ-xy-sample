@@ -129,7 +129,7 @@ void HQ_XY::HQ_XY_sample()
         if (scale_flag_ == 0)
             N_sample_scaled_ = N_sample_;
         else
-            N_sample_scaled_ = int(0.01 * Int_T_AB_);
+            N_sample_scaled_ = int(N_scale_ * Int_T_AB_);
             if (N_sample_scaled_ == 0)  // in order to avoid the situation that the event is too collisional and there's no particle produced
                 N_sample_scaled_ = 1;
 //        XY_list_(boost::extents[N_sample_scaled][2]);
