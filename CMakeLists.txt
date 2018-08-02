@@ -22,5 +22,5 @@ endif()
 set(LIBRARY_NAME "lib${PROJECT_NAME}")
 add_subdirectory(src)
 
-install(FILES HQ_sample.conf DESTINATION ${PROJECT_NAME})
+install(FILES HQ_sample.conf DESTINATION bin)
 

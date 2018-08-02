@@ -11,4 +11,4 @@ set(MAIN ${PROJECT_NAME}.cpp)
 add_executable(${PROJECT_NAME} ${MAIN})
 target_link_libraries(${PROJECT_NAME} ${LIBRARY_NAME} ${Boost_LIBRARIES})
 
-install(TARGETS ${PROJECT_NAME} DESTINATION ${PROJECT_NAME})
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
